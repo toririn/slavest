@@ -1,0 +1,2 @@
+class RelationChatMentionUser < ApplicationRecord
+end

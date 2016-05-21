@@ -3,8 +3,7 @@ class CreateChannels < ActiveRecord::Migration[5.0]
     create_table :channels do |t|
       t.string :slack_id
       t.string :slack_name
-      t.string :type
-
+      t.integer :created_user_id
       t.timestamps
     end
   end
