@@ -15,17 +15,18 @@ module Responces
       @botter.set_condition( channel: "times_toririn", user: ["toririn"], text: [/\A@slavest/, /\A@sv/])
     end
 
-    # ユーザが投稿した Chat に文字列を付加してそのままオウム返しにする
+
     def set_responce_condition
       @botter.set_responce do |data, res|
-        user, channel, text = data["user"], data["channel"], data["text"] rescue nil
-        text.gsub!(/\A@slavest|\A@sv/, "").gsub!(/\A\n/, "") rescue nil
-        text = "「#{text}」\nですね。それでそれで？"
-        if text.present?
-          @poster.channel(to: "times_toririn", text: text, name: "slavest")
-        end
+        params = data.to_json
+        HCLIENT.post_content(post_url, params, 'Content-Type' => 'application/json')
         nil
       end
+    end
+
+    def post_url
+      rails = Settings[:slavest][:rails]
+      rails[:urls][:base] + rails[:paths][:test]
     end
   end
 end

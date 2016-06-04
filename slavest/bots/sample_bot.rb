@@ -2,7 +2,24 @@ class SampleBot < BaseBot
   private
 
   def set
-    @botter.set_condition( channel: "times_toririn", user: ["toririn"], text: ["こんにちは"])
-    @botter.set_responce(channel: "times_toririn", user: "Slavest", text: "こんにちは！")
+    set_receive_condition
+    set_responce_condition
+  end
+
+  def set_receive_condition
+    @botter.set_condition( channel: "times_toririn", user: ["toririn"], text: [/\A@slavest/, /\A@sv/])
+  end
+
+  # ユーザが投稿した Chat に文字列を付加してそのままオウム返しにする
+  def set_responce_condition
+    @botter.set_responce do |data, res|
+      user, channel, text = data["user"], data["channel"], data["text"] rescue nil
+      text.gsub!(/\A@slavest|\A@sv/, "").gsub!(/\A\n/, "") rescue nil
+      text = "「#{text}」\nですね。それでそれで？"
+      if text.present?
+        @poster.channel(to: "times_toririn", text: text, name: "slavest")
+      end
+      nil
+    end
   end
 end

@@ -4,7 +4,6 @@ source "https://rubygems.org"
 ruby '2.2.2'
 gem "simple_slack"
 gem 'activesupport'
-gem 'activerecord'
 
 # pryを使うgem
 gem 'pry-rails'
@@ -12,3 +11,4 @@ gem 'pry-doc'
 gem 'pry-byebug'
 gem 'pry-stack_explorer'
 gem 'parallel'
+gem 'httpclient'

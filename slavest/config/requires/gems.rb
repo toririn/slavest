@@ -1,6 +1,7 @@
 require "simple_slack"
-require "active_support/core_ext/object"
+require "active_support/all"
 require "parallel"
+require "httpclient"
 
 # pryを使うgem
 require 'pry-rails'
