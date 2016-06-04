@@ -1,10 +1,11 @@
 require "./config/requires/require"
 
-slavest_bot1 = ResponceBot.new.botter
-slavest_bot2 = SampleBot.new.botter
+slavest_bot1 = Responces::ChatBot.new.botter
 
-bots = [slavest_bot1, slavest_bot2]
+bots = [slavest_bot1]
 
 Parallel.each(bots, in_threads: bots.size) do |bot|
   bot.start
 end
+
+p "SLAVEST START"
