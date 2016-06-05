@@ -7,7 +7,7 @@ class BaseBot
   # Bot Class は全て getter, poster, botter への参照ができる。
   # また initialize のタイミングで set メソッドが呼ばれることで bot で反応する条件やレスポンス条件をセットする。
   def initialize
-    @client = SimpleSlack::Client.new(CONFIG["slack"]["api_token"])
+    @client = SimpleSlack::Client.new(Settings[:slack][:api_token])
     @getter = client.get
     @poster = client.post
     @botter = client.bot

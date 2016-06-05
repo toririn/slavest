@@ -1,4 +1,5 @@
 slavest:
+  api_token: <%= ENV['SLAVEST_API_TOKEN'] %>
   rails:
     urls:
       base: http://localhost:3000
@@ -7,4 +8,5 @@ slavest:
         new: /everests/new
       auth: /auth
       test: /test
-    api_token: helloworld
+slack:
+  api_token: <%= ENV['SLACK_API_TOKEN'] %>
