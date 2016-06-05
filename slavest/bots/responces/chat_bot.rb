@@ -21,8 +21,9 @@ module Responces
       @botter.set_responce do |data, res|
         if data.present?
           begin
+            hc = HTTPClient.new
             params = add_api_token(data).to_json
-            result = HCLIENT.post_content(post_url, params, 'Content-Type' => 'application/json')
+            result = hc.post_content(post_url, params, 'Content-Type' => 'application/json')
             puts result
           rescue => e
             puts e

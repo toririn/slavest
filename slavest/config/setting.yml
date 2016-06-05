@@ -1,0 +1,10 @@
+slavest:
+  rails:
+    urls:
+      base: http://localhost:3000
+    paths:
+      everests:
+        new: /everests/new
+      auth: /auth
+      test: /test
+    api_token: helloworld
