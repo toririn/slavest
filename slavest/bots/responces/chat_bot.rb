@@ -38,7 +38,7 @@ module Responces
     end
 
     def add_api_token(data)
-      data.merge(api_token: Settings[:slavest][:rails][:api_token])
+      data.merge(api_token: Settings[:slavest][:api_token])
     end
   end
 end

@@ -6,7 +6,7 @@ module Auth
   end
 
   def verify_api_token
-    unless params[:api_token] == EasySettings.slack.api_token
+    unless params[:api_token] == EasySettings.slavest.api_token
       render json: { message: "invalid api token"}
     end
   end

@@ -9,6 +9,9 @@ default: &default
 development:
   <<: *default
   database: slavest_dev
+  username: <%= ENV['MYSQL_SLAVEST_USER'] %>
+  password: <%= ENV['MYSQL_SLAVEST_PASSWORD'] %>
+  socket: /var/run/mysqld/mysqld.sock
 
 test:
   <<: *default
