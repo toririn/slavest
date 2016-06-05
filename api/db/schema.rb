@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20160521081437) do
     t.integer  "user_id",                  null: false
     t.integer  "channel_id",               null: false
     t.text     "text",       limit: 65535
-    t.string   "permalink"
+    t.string   "ts"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
   end

@@ -6,6 +6,7 @@ module Responces
 
     def set
       set_receive_condition
+      binding.pry if debug_mode?
       set_responce_condition
     end
 
@@ -18,15 +19,25 @@ module Responces
 
     def set_responce_condition
       @botter.set_responce do |data, res|
-        params = data.to_json
-        HCLIENT.post_content(post_url, params, 'Content-Type' => 'application/json')
-        nil
+        if data.present?
+          begin
+            params = add_api_token(data).to_json
+            result = HCLIENT.post_content(post_url, params, 'Content-Type' => 'application/json')
+            puts result
+          rescue => e
+            puts e
+          end
+        end
       end
     end
 
     def post_url
       rails = Settings[:slavest][:rails]
-      rails[:urls][:base] + rails[:paths][:test]
+      rails[:urls][:base] + rails[:paths][:everests][:new]
+    end
+
+    def add_api_token(data)
+      data.merge(api_token: Settings[:slavest][:rails][:api_token])
     end
   end
 end

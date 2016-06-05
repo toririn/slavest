@@ -5,7 +5,7 @@ class CreateChats < ActiveRecord::Migration[5.0]
       t.integer :user_id, null: false
       t.integer :channel_id, null: false
       t.text :text
-      t.string :permalink
+      t.string :ts
       t.timestamps
     end
   end
