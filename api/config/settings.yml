@@ -1,0 +1,14 @@
+default: &default
+  slack:
+    api_token: <%= ENV['SLACK_API_TOKEN'] %>
+  slavest:
+    api_token: <%= ENV['SLAVEST_API_TOKEN'] %>
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default
