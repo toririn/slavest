@@ -16,9 +16,10 @@ ActiveRecord::Schema.define(version: 20160605082445) do
   create_table "channels", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "slack_id"
     t.string   "slack_name"
+    t.text     "description",     limit: 65535
     t.integer  "created_user_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
   create_table "chats", id: :bigint, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
