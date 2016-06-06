@@ -3,6 +3,11 @@ default: &default
     api_token: <%= ENV['SLACK_API_TOKEN'] %>
   slavest:
     api_token: <%= ENV['SLAVEST_API_TOKEN'] %>
+  errors:
+    systems:
+      messages:
+        invalid_param: 予期せぬパラメータが渡されました。
+        user_or_channel_presence: DBに存在しないUserもしくはChannelへの参照が起きました。
 
 development:
   <<: *default

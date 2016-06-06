@@ -10,3 +10,8 @@ slavest:
       test: /test
 slack:
   api_token: <%= ENV['SLACK_API_TOKEN'] %>
+everests:
+  urls:
+    base: http://192.168.20.2:11180
+    gets:
+      emotion: /calcEmotion?text=
