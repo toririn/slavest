@@ -6,12 +6,19 @@ class JobControll::EverestsNewJob < ApplicationJob
   end
 
   def perform(user: , channel: , text: , ts: )
-    client = SimpleSlack::Client.new(EasySettings.slack.api_token)
-    send_text = text.gsub(/\A.*\n/, "")
-    if client.post.channel(to: channel, text: "#{send_text}\n(emovalue: #{Random.rand(1..100).to_f/100})", name: "slavest")
-      Rails.logger.debug "post ok"
-    else
-      Rails.logger.error "post error"
-    end
+    params = refine_params(user, channel, text, ts)
+
+    chat = Chat.create(params)
+    Everests::GetEmotionJob.perform_later(params, chat_id: chat.id)
+  end
+
+  # パラメータからユーザID,チャンネルIDを取得し、ハッシュとして返す。
+  def refine_params(user, channel, text, ts)
+    user_id    = User.by_slack(user).id
+    channel_id = Channel.by_slack(channel).id
+    { user_id: user_id, channel_id: channel_id, text: text, ts: ts}
+  rescue => e
+      Rails.logger.error e
+      raise EasySettings.errors.systems.messages.user_or_channel_presence
   end
 end
