@@ -6,7 +6,7 @@ class Everests::GetEmotionJob < ApplicationJob
   end
 
   def perform(user_id: , channel_id: , text: , ts: , chat_id: )
-    #hc = ::HTTPClient.new
+    hc = ::HTTPClient.new
     #result = hc.get_content(everests_url + text)
     #一時的にjsonを生成
     result = JSON.parse(temp_back)

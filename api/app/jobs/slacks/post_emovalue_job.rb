@@ -10,7 +10,7 @@ class Slacks::PostEmovalueJob < ApplicationJob
     user    = User.find(user_id)
     channel = Channel.find(channel_id)
     send_text = "発言者： #{user.slack_name}\n発言内容： #{text}"
-    if client.post.channel(to: channel.slack_id, text: "#{send_text}\n(emovalue: #{emovalue})", name: "slavest")
+    if client.post.channel(to: channel.slack_id, text: "#{send_text}\n(emovalue: #{emovalue})", name: EasySettings.slavest.bot_names.everest)
       Rails.logger.debug "post ok"
     else
       Rails.logger.error "post error"

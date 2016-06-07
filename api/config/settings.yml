@@ -3,6 +3,8 @@ default: &default
     api_token: <%= ENV['SLACK_API_TOKEN'] %>
   slavest:
     api_token: <%= ENV['SLAVEST_API_TOKEN'] %>
+    bot_names:
+      everest: Everest君
   errors:
     systems:
       messages:

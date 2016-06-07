@@ -50,4 +50,7 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   config.active_job.queue_adapter = :delayed_job
+
+  config.logger = Logger.new(config.paths['log'].first, 5, 4 * Integer::MEGABYTE)
+  config.logger.formatter = Logger::Formatter.new
 end
