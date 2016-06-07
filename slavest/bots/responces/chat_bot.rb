@@ -12,11 +12,13 @@ module Responces
 
     private
 
+    # 指定したチャンネルの全てのユーザの全ての投稿を起動条件とする
     def set_receive_condition
-      @botter.set_condition( channel: "times_toririn", user: ["toririn"], text: [/\A@slavest/, /\A@sv/])
+      @botter.set_condition( channel: "times_toririn")
     end
 
 
+    # 投稿されたチャットの「投稿者、投稿チャンネル、投稿内容、登録日時（タイムスタンプ）」をapiへ送る
     def set_responce_condition
       @botter.set_responce do |data, res|
         if data.present?
