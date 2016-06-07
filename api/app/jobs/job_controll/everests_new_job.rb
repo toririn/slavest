@@ -9,7 +9,7 @@ class JobControll::EverestsNewJob < ApplicationJob
     params = refine_params(user, channel, text, ts)
 
     chat = Chat.create(params)
-    Everests::GetEmotionJob.perform_later(params, chat_id: chat.id)
+    Everests::GetEmotionJob.perform_later(params.merge(chat_id: chat.id))
   end
 
   # パラメータからユーザID,チャンネルIDを取得し、ハッシュとして返す。
@@ -19,6 +19,6 @@ class JobControll::EverestsNewJob < ApplicationJob
     { user_id: user_id, channel_id: channel_id, text: text, ts: ts}
   rescue => e
       Rails.logger.error e
-      raise EasySettings.errors.systems.messages.user_or_channel_presence
+      raise "#{EasySettings.errors.systems.messages.user_or_channel_presence} - { user: #{user}, channel: #{channel}, text: #{text}, ts: #{ts} }"
   end
 end

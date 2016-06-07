@@ -2,16 +2,16 @@ class Everests::GetEmotionJob < ApplicationJob
   queue_as :everests_get_emotion
 
   rescue_from(Exception) do |e|
-    Rails.logger.error e
+    Rails.logger.error "#{e.message} - #{e.backtrace.join("\n")}"
   end
 
-  def perform(user: , channel: , text: , ts: , chat_id: )
-    hc = HTTPClient.new
+  def perform(user_id: , channel_id: , text: , ts: , chat_id: )
+    #hc = ::HTTPClient.new
     #result = hc.get_content(everests_url + text)
-    result = temp_back
-    Slacks::PostEmovalueJob(user, channel, text, result["emovalue"])
+    #一時的にjsonを生成
+    result = JSON.parse(temp_back)
+    Slacks::PostEmovalueJob.perform_later(user_id: user_id, channel_id: channel_id, text: text, emovalue: result["emovalue"])
 
-    # Emotionレコード作成
     Emotion.create(chat_id: chat_id, emovalue: result["emovalue"], repeat: result["repeat"])
   end
 
