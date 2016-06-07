@@ -28,6 +28,7 @@ gem 'jbuilder', '~> 2.0'
 # gem 'bcrypt', '~> 3.1.7'
 gem "simple_slack", '~> 0.2.5'
 gem "easy_settings"
+gem 'httpclient'
 
 gem 'delayed_job_active_record'
 
