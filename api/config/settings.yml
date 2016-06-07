@@ -10,6 +10,10 @@ default: &default
       messages:
         invalid_param: 予期せぬパラメータが渡されました。
         user_or_channel_presence: DBに存在しないUserもしくはChannelへの参照が起きました。
+  everests:
+    urls:
+      base: http://192.168.1.70:3120
+      get_emotion: /emotion?text=
 
 development:
   <<: *default

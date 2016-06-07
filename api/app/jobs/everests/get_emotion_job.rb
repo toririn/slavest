@@ -7,7 +7,7 @@ class Everests::GetEmotionJob < ApplicationJob
 
   def perform(user_id: , channel_id: , text: , ts: , chat_id: )
     hc = ::HTTPClient.new
-    #result = hc.get_content(everests_url + text)
+    #result = hc.get_content(URL.parse(everests_url + text))
     #一時的にjsonを生成
     result = JSON.parse(temp_back)
     Slacks::PostEmovalueJob.perform_later(user_id: user_id, channel_id: channel_id, text: text, emovalue: result["emovalue"])
@@ -17,7 +17,7 @@ class Everests::GetEmotionJob < ApplicationJob
 
   def everests_url
     urls = EasySettings.everests.urls
-    urls.base + urls.gets.emotion
+    urls.base + urls.get_emotion
   end
 
   def temp_back
