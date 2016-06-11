@@ -13,7 +13,8 @@ module Responces
 
     # 指定したチャンネルの全てのユーザの全ての投稿を起動条件とする
     def set_receive_condition
-      @botter.set_condition( channel: "times_toririn")
+      channels = %W(times_toririn)
+      @botter.set_condition( channel: channels)
     end
 
 
@@ -47,13 +48,12 @@ module Responces
     # textの先頭が @sv もしくは @slarest で始まり、 average もしくは ave が文中にあれば true を返す
     def fit_text?(text)
       refine_text = text.gsub(/　|\s|\n/, "").strip.downcase
-      mention_valid = refine_text.match(/\A@sv|\A@slarest/) rescue false
+      mention_valid = refine_text.match(/\A@st|\A@slarest/) rescue false
       average_valid = refine_text.match(/average|ave/) rescue false
 
       mention_valid && average_valid
     rescue => ex
-      puts ex
-      puts "param: #{text}"
+      puts "#{ex}\nparam: #{text}"
       false
     end
   end
