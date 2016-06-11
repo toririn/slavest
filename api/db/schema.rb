@@ -48,6 +48,8 @@ ActiveRecord::Schema.define(version: 20160605082445) do
 
   create_table "emotions", id: :bigint, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint   "chat_id"
+    t.integer  "user_id"
+    t.integer  "channel_id"
     t.float    "emovalue",   limit: 24
     t.text     "repeat",     limit: 65535
     t.datetime "created_at",               null: false

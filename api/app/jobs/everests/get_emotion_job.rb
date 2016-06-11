@@ -12,7 +12,7 @@ class Everests::GetEmotionJob < ApplicationJob
     result = JSON.parse(temp_back)
     Slacks::PostEmovalueJob.perform_later(user_id: user_id, channel_id: channel_id, text: text, emovalue: result["emovalue"])
 
-    Emotion.create(chat_id: chat_id, emovalue: result["emovalue"], repeat: result["repeat"])
+    Emotion.create(chat_id: chat_id, user_id: user_id, channel_id: channel_id, emovalue: result["emovalue"], repeat: result["repeat"])
   end
 
   def everests_url

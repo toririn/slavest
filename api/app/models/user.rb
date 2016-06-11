@@ -1,7 +1,9 @@
 class User < ApplicationRecord
   has_many :chats
+  has_many :emotions
 
-  scope :with_chats, -> { includes(:chats) }
+  scope :with_chats,    -> { includes(:chats) }
+  scope :with_emotions, -> { includes(:emotions) }
 
   def self.by_slack(param = nil, id: nil, name: nil)
     if id
