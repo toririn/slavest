@@ -1,4 +1,7 @@
 class Channel < ApplicationRecord
+  has_many :chats
+
+  scope :with_chats, -> { includes(:chats) }
   def self.by_slack(param = nil, id: nil, name: nil)
     if id
       find_by(slack_id: id)
