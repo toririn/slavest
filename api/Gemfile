@@ -42,7 +42,9 @@ group :development, :test do
   gem 'pry-doc'
   gem 'pry-byebug'
   gem 'pry-stack_explorer'
-  gem 'rspec-rails'
+  gem "rspec-rails"        # rspec本体
+  gem "factory_girl_rails" # テストデータ作成
+  gem 'database_cleaner'
 end
 
 group :development do
