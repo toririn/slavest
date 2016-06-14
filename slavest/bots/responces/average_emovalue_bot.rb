@@ -1,8 +1,8 @@
 # User が Slack に対して操作を行ったときに反応する Bot を集めた Module
 module Responces
 
-  # Chat に対するレスポンス例
-  class ChatBot < BaseBot
+  # ユーザに自分の感情値の平均値を返す
+  class AverageEmovalueBot < BaseBot
 
     def set
       set_receive_condition
@@ -18,7 +18,9 @@ module Responces
     end
 
 
-    # 投稿されたチャットの「投稿者、投稿チャンネル、投稿内容、登録日時（タイムスタンプ）」をapiへ送る
+    # 投稿されたチャットの内容が「@slavest or @sv」で始まり
+    # なおかつ 「average or ave」という文字が入っていれば
+    # 感情平均値を返すAPIのURLに「投稿者、投稿チャンネル、投稿内容、登録日時（タイムスタンプ）」を送る
     def set_responce_condition
       @botter.set_responce do |data, res|
         if data.present? && fit_text?(data["text"])
@@ -36,17 +38,20 @@ module Responces
 
     def post_url
       rails = Settings[:slavest][:rails]
-      rails[:urls][:base] + rails[:paths][:everests][:new]
+      rails[:urls][:base] + rails[:paths][:everests][:show]
     end
 
     def add_api_token(data)
       data.merge(api_token: Settings[:slavest][:api_token])
     end
 
-    # textの先頭が @sv もしくは @slarest 【ではなければ】trueを返す
+    # textの先頭が @sv もしくは @slarest で始まり、 average もしくは ave が文中にあれば true を返す
     def fit_text?(text)
       refine_text = text.gsub(/　|\s|\n/, "").strip.downcase
-      !refine_text.match(/\A@st|\A@slarest/) rescue false
+      mention_valid = refine_text.match(/\A@st|\A@slarest/) rescue false
+      average_valid = refine_text.match(/average|ave/) rescue false
+
+      mention_valid && average_valid
     rescue => ex
       puts "#{ex}\nparam: #{text}"
       false

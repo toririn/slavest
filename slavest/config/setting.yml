@@ -6,6 +6,7 @@ slavest:
     paths:
       everests:
         new: /everests/new
+        show: /everests/show
       auth: /auth
       test: /test
 slack:

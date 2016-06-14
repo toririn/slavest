@@ -41,6 +41,7 @@ Rails.application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+  config.time_zone = 'Tokyo'
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
@@ -53,4 +54,5 @@ Rails.application.configure do
 
   config.logger = Logger.new(config.paths['log'].first, 5, 4 * Integer::MEGABYTE)
   config.logger.formatter = Logger::Formatter.new
+
 end
