@@ -45,6 +45,9 @@ group :development, :test do
   gem "rspec-rails"        # rspec本体
   gem "factory_girl_rails" # テストデータ作成
   gem 'database_cleaner'
+  gem 'shoulda-matchers'
+  gem 'faker'
+  gem 'faker-japanese'
   gem 'rubocop'
 end
 

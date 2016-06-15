@@ -11,13 +11,13 @@ class Emotion < ApplicationRecord
   scope :by_user,    ->(user)             { includes(:user).where(users: { id: user.id }) }
   scope :by_channel, ->(channel)          { includes(:channel).where(channels: { id: channel.id }) }
 
-  def self.average_emovalue(param = nil)
-    case param
+  def self.average_emovalue(refine_target = nil)
+    case refine_target
     when User
-      user = param
+      user = refine_target
       by_user(user).average(:emovalue).to_f
     when Channel
-      channel = param
+      channel = refine_target
       by_channel(channel).average(:emovalue).to_f
     else
       average(:emovalue).to_f
