@@ -11,6 +11,21 @@ describe Channel do
         should have_many(:emotions)
       end
     end
+    context 'has_one:' do
+      it 'user' do
+        should have_one(:user)
+      end
+    end
+  end
+
+  describe '#with_user' do
+    let(:channel) { create(:channel, :with_user) }
+
+    context '正常系:' do
+      it 'チャンネル作成したユーザのオブジェクトを取得できること' do
+        expect(Channel.with_user.find(channel.id).user).to eq channel.user
+      end
+    end
   end
 
   describe '#by_slack' do

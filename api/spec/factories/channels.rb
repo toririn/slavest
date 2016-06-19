@@ -1,4 +1,5 @@
 FactoryGirl.define do
+  # test用Slackで使用しているチャンネル情報を入力。
   factory :channel do
     slack_id        { "C14TGRC1G" }
     slack_name      { "times_toririn" }
@@ -6,5 +7,10 @@ FactoryGirl.define do
     created_user_id { 1  }
     created_at      { Time.zone.yesterday }
     updated_at      { Time.zone.now.beginning_of_day }
+
+    trait :with_user do
+      user
+      created_user_id { user.id }
+    end
   end
 end

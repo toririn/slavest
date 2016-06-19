@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe User, type: :model do
+describe User do
 
   describe '#relation' do
     context 'has_many:' do
@@ -11,6 +11,22 @@ describe User, type: :model do
         should have_many(:emotions)
       end
     end
+    context 'has_one:' do
+      it 'channel' do
+        should have_one(:channel)
+      end
+    end
+  end
+
+  describe '#with_channel' do
+    let(:user) { create(:user, :with_channel) }
+
+    context '正常系:' do
+      it '作成したチャンネルのオブジェクトを取得できること' do
+        binding.pry
+        expect(User.with_channel.find(user.id).channel).to eq user.channel
+      end
+    end
   end
 
   describe '#by_slack' do
@@ -18,7 +34,6 @@ describe User, type: :model do
 
     context '正常系:' do
       it '引数にSlackの名前を渡してレコードが取得できること' do
-        binding.pry
         expect(User.by_slack(user.slack_name).present?).to eq true
       end
       it '引数にSlackのIDを渡してレコードが取得できること' do
