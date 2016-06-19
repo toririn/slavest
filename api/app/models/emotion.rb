@@ -1,5 +1,5 @@
 class Emotion < ApplicationRecord
-  has_one :chat, foreign_key: :id
+  has_one    :chat, foreign_key: :id
   belongs_to :user, foreign_key: :user_id
   belongs_to :channel, foreign_key: :channel_id
 
@@ -15,12 +15,14 @@ class Emotion < ApplicationRecord
     case refine_target
     when User
       user = refine_target
-      by_user(user).average(:emovalue).to_f
+      average_emovalue = by_user(user).average(:emovalue)
     when Channel
       channel = refine_target
-      by_channel(channel).average(:emovalue).to_f
+      average_emovalue = by_channel(channel).average(:emovalue)
     else
-      average(:emovalue).to_f
+      average_emovalue = average(:emovalue)
     end
+
+    average_emovalue.to_d.floor(EasySettings.models.emotion.emovalue_number_digits).to_f
   end
 end

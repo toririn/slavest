@@ -14,12 +14,19 @@ default: &default
     urls:
       base: http://192.168.1.70:3120
       get_emotion: /emotion?text=
+  models:
+    emotion:
+      emovalue_number_digits: 5
 
 development:
   <<: *default
 
 test:
   <<: *default
+  slack:
+    api_token: <%= ENV['SLACK_API_TOKEN_TEST'] %>
+  slavest:
+    api_token: <%= ENV['SLAVEST_API_TOKEN_TEST'] %>
 
 production:
   <<: *default

@@ -43,4 +43,19 @@ describe Emotion do
       end
     end
   end
+
+  describe '#self.average_emovalue' do
+    let(:emotions) { create_list(:emotion, 50) }
+    let(:user)     { create(:user, :with_emotions, emotion_count: 50) }
+    context '正常系:' do
+      it '全ユーザのemovalueの平均値を出す' do
+        average_emovalue = (emotions.inject(0){|total, emotion| total +=emotion.emovalue })/emotions.size
+        expect(Emotion.average_emovalue).to eq average_emovalue.to_d.floor(EasySettings.models.emotion.emovalue_number_digits).to_f
+      end
+      it '指定したユーザのemovalueの平均値を出す' do
+        average_emovalue = (user.emotions.inject(0){|total, emotion| total +=emotion.emovalue })/user.emotions.size
+        expect(Emotion.average_emovalue(user)).to eq average_emovalue.to_d.floor(EasySettings.models.emotion.emovalue_number_digits).to_f
+      end
+    end
+  end
 end

@@ -11,5 +11,14 @@ FactoryGirl.define do
     trait :with_channel do
       channel
     end
+
+    trait :with_emotions do
+      transient do
+        emotion_count 10
+      end
+      after(:create) do |user, evaluator|
+        user.emotions = create_list(:emotion, evaluator.emotion_count)
+      end
+    end
   end
 end
