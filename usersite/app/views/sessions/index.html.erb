@@ -1,0 +1,33 @@
+<nav class="white" role="navigation">
+  <div class="nav-wrapper container">
+    <%= link_to("Slarest", "", id: "logo-container", class: "brand-logo") %>
+    <ul class="right hide-on-med-and-down">
+      <li><%= link_to("Top",  "") %></li>
+      <li><%= link_to("Info", "") %></li>
+    </ul>
+    <ul id="nav-mobile" class="side-nav">
+      <li><%= link_to("Top",  "") %></li>
+      <li><%= link_to("Info", "") %></li>
+    </ul>
+    <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+  </div>
+</nav>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <h2>Welcome the Slarest Door</h2>
+      <p>秘密の暗号を入力してください。</p>
+    </div>
+    <div class="col-sm-4">
+      <%= form_tag(sessions_path, method: :post) do %>
+        <%= text_field :sessions, :key %>
+        <%= submit_tag "送信" %>
+      <% end %>
+    </div>
+    <div class="col-sm-6">
+      <% if flash[:notice] %>
+        <h4 class="text-danger"><%= flash[:notice] %></h4>
+      <% end %>
+    </div>
+  </div>
+</div>

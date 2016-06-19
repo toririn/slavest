@@ -17,6 +17,8 @@ default: &default
   models:
     emotion:
       emovalue_number_digits: 5
+    sessions:
+      key: <%= ENV['SESSIONS_KEY'] %>
 
 development:
   <<: *default

@@ -32,6 +32,8 @@ gem 'httpclient'
 
 gem 'delayed_job_active_record'
 
+gem 'materialize-sass'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
