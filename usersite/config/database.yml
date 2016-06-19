@@ -1,0 +1,22 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+  username: <%= ENV['MYSQL_SLAVEST_USER'] %>
+  password: <%= ENV['MYSQL_SLAVEST_PASSWORD'] %>
+  socket: /var/run/mysqld/mysqld.sock
+
+development:
+  <<: *default
+  database: slavest_dev
+  username: <%= ENV['MYSQL_SLAVEST_USER'] %>
+  password: <%= ENV['MYSQL_SLAVEST_PASSWORD'] %>
+  socket: /var/run/mysqld/mysqld.sock
+
+test:
+  <<: *default
+  database: slavest_test
+
+production:
+  <<: *default
+  database: everest_production

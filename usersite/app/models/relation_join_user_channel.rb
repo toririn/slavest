@@ -1,0 +1,2 @@
+class RelationJoinUserChannel < ApplicationRecord
+end

@@ -1,0 +1,2 @@
+class RelationChatReaction < ApplicationRecord
+end
