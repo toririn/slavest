@@ -1,3 +1,0 @@
-class EmotionAnalysis
-
-end
