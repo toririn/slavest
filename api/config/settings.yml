@@ -2,7 +2,7 @@ default: &default
   slack:
     api_token: <%= ENV['SLACK_API_TOKEN'] %>
   slavest:
-    api_token: <%= ENV['SLAVEST_API_TOKEN'] %>
+    api_token: <%= ENV['SLAREST_API_TOKEN'] %>
     bot_names:
       everest: Everest君
   errors:
@@ -12,8 +12,8 @@ default: &default
         user_or_channel_presence: DBに存在しないUserもしくはChannelへの参照が起きました。
   everests:
     urls:
-      base: http://192.168.1.70:3120
-      get_emotion: /emotion?text=
+      base: http://192.168.20.2:24080
+      get_emotion: /calcEmotion?text=
   models:
     emotion:
       emovalue_number_digits: 5
@@ -26,7 +26,7 @@ test:
   slack:
     api_token: <%= ENV['SLACK_API_TOKEN_TEST'] %>
   slavest:
-    api_token: <%= ENV['SLAVEST_API_TOKEN_TEST'] %>
+    api_token: <%= ENV['SLAREST_API_TOKEN_TEST'] %>
 
 production:
   <<: *default
