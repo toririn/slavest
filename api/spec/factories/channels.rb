@@ -8,6 +8,11 @@ FactoryGirl.define do
     created_at      { Time.zone.yesterday }
     updated_at      { Time.zone.now.beginning_of_day }
 
+    trait :with_user do
+      user
+      created_user_id { user.id }
+    end
+
     trait :with_emotions do
       transient do
         emotion_count 10
