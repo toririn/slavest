@@ -13,7 +13,7 @@ class Everests::GetEmotionJob < ApplicationJob
     #hc = Everests::GetEmotion.new
     #result = JSON.parse(hc.get(text))
     result = JSON.parse({ emoValue: 0.800100, behavior: false, osychology: false, repeat: "釣りは、だね", featWordCount: 0, congnition: true, emotion: true }.to_json)
-    emovalue = result["emoValue"].to_d.floor(4).to_f
+    emovalue = result["emoValue"].to_d.floor(EasySettings.models.emotion.emovalue_number_digits).to_f
     emotion = Emotion.create(chat_id: chat.id, user_id: user.id, channel_id: channel.id, emovalue: emovalue, repeat: result["repeat"])
 
     client = SlackForm.new

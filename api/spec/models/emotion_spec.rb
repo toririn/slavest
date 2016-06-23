@@ -61,6 +61,13 @@ describe Emotion do
         average_emovalue = (channel.emotions.inject(0){|total, emotion| total +=emotion.emovalue })/channel.emotions.size
         expect(Emotion.average_emovalue(channel)).to eq average_emovalue.to_d.floor(EasySettings.models.emotion.emovalue_number_digits).to_f
       end
+
+      it 'emovalueが0.0のレコードは平均値を出すときの対象外とする' do
+        create_list(:emotion, 30, :zero_emovalue)
+        average_emovalue = (emotions.inject(0){|total, emotion| total +=emotion.emovalue })/emotions.size
+        expect(Emotion.average_emovalue).to eq average_emovalue.to_d.floor(EasySettings.models.emotion.emovalue_number_digits).to_f
+      end
+
     end
   end
 end

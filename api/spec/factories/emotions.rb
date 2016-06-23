@@ -8,5 +8,9 @@ FactoryGirl.define do
     repeat     { Faker::Japanese::Name.name.concat("さん、だね。") }
     created_at { Time.zone.now.beginning_of_day }
     updated_at { Time.zone.now.beginning_of_day }
+
+    trait :zero_emovalue do
+      emovalue { 0.0 }
+    end
   end
 end
