@@ -18,8 +18,8 @@ describe EmotionsController do
 
       it 'message:OK, statu:200, result:true のJSONが返ること' do
         res = JSON.parse(response.body)
-        expect(res["message"]).to eq "OK"
-        expect(res["status"]).to eq "200"
+        expect(res["message"]).to eq EasySettings.controllers.emotions.messages.ok
+        expect(res["status"]).to eq 200
         expect(res["result"]).to eq true
       end
 
@@ -42,12 +42,12 @@ describe EmotionsController do
 
       it 'DBに存在しないユーザの投稿があったら警告を返す' do
         res = JSON.parse(response.body)
-        expect(res["message"]).to eq "WORN - 存在しないユーザです"
+        expect(res["message"]).to eq EasySettings.controllers.emotions.messages.user_not_found
       end
 
       it 'statu:200, result:false のJSONが返ること' do
         res = JSON.parse(response.body)
-        expect(res["status"]).to eq "200"
+        expect(res["status"]).to eq 200
         expect(res["result"]).to eq false
       end
     end

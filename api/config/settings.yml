@@ -17,6 +17,11 @@ default: &default
   models:
     emotion:
       emovalue_number_digits: 5
+  controllers:
+    emotions:
+      messages:
+        ok: OK
+        user_not_found: WORN - 存在しないユーザです
 
 development:
   <<: *default
