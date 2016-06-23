@@ -24,6 +24,12 @@ class Emotion < ApplicationRecord
       average_emovalue = without_zero_emovalue.average(:emovalue)
     end
 
-    average_emovalue.to_d.floor(EasySettings.models.emotion.emovalue_number_digits).to_f
+    # 平均値が取得できたら値をまるめて返す。なければ警告ログを出し0.0を返す。
+    if average_emovalue.present?
+      average_emovalue.to_d.floor(EasySettings.models.emotion.emovalue_number_digits).to_f
+    else
+      Rails.logger.warn "Not even one emotions record. refine-target: #{refine_target}"
+      0.0
+    end
   end
 end

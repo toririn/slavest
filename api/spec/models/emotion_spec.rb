@@ -67,7 +67,16 @@ describe Emotion do
         average_emovalue = (emotions.inject(0){|total, emotion| total +=emotion.emovalue })/emotions.size
         expect(Emotion.average_emovalue).to eq average_emovalue.to_d.floor(EasySettings.models.emotion.emovalue_number_digits).to_f
       end
+    end
 
+    context '異常系:' do
+      let(:user)     { create(:user) }
+      let(:channel)  { create(:channel) }
+      it 'レコードが一件もなければ0.0を返すこと' do
+        expect(Emotion.average_emovalue).to eq 0.0
+        expect(Emotion.average_emovalue(user)).to eq 0.0
+        expect(Emotion.average_emovalue(channel)).to eq 0.0
+      end
     end
   end
 end

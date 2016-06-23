@@ -4,7 +4,7 @@ class EmotionsController < ApplicationController
     param = params.permit(:user, :channel, :text, :ts).to_h
 
     if User.by_slack(param[:user]).present?
-      Everests::GetEmotionJob.perform_later(user: param[:user], channel: param[:channel], text: param[:text], ts: param[:ts])
+      Everests::GetEmotionJob.perform_later(slack_user_id: param[:user], slack_channel_id: param[:channel], text: param[:text], ts: param[:ts])
       render json: success_json
     else
       render json: worn_json
@@ -15,7 +15,7 @@ class EmotionsController < ApplicationController
     param = params.permit(:user, :channel, :text).to_h
 
     if User.by_slack(param[:user]).present?
-      JobControll::EverestsShowJob.perform_later(user: param[:user], channel: param[:channel], text: param[:text])
+      Everests::PostAverageEmovalueJob.perform_later(slack_user_id: param[:user], slack_channel_id: param[:channel], text: param[:text])
       render json: success_json
     else
       render json: worn_json
