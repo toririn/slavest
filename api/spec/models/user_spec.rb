@@ -23,7 +23,6 @@ describe User do
 
     context '正常系:' do
       it '作成したチャンネルのオブジェクトを取得できること' do
-        binding.pry
         expect(User.with_channel.find(user.id).channel).to eq user.channel
       end
     end

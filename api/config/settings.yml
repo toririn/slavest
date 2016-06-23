@@ -27,6 +27,8 @@ test:
     api_token: <%= ENV['SLACK_API_TOKEN_TEST'] %>
   slavest:
     api_token: <%= ENV['SLAREST_API_TOKEN_TEST'] %>
+    bot_names:
+      everest: Test
 
 production:
   <<: *default

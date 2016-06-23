@@ -1,26 +1,25 @@
 class Everests::GetEmotionJob < ApplicationJob
-  queue_as :everests_get_emotion
+  queue_as :get_emotion
 
   rescue_from(Exception) do |e|
     Rails.logger.error "#{e.message} - #{e.backtrace.join("\n")}"
   end
 
-  def perform(user_id: , channel_id: , text: , ts: , chat_id: )
-    hc = ::HTTPClient.new
-    #result = hc.get_content(URL.parse(everests_url + text))
-    #一時的にjsonを生成
-    result = JSON.parse(temp_back)
-    Slacks::PostEmovalueJob.perform_later(user_id: user_id, channel_id: channel_id, text: text, emovalue: result["emovalue"])
+  def perform(slack_user_id: , slack_channel_id: , text: , ts: )
+    user    = User.by_slack(slack_user_id)
+    channel = Channel.by_slack(slack_channel_id)
+    chat    = Chat.create(user_id: user.id, channel_id: channel.id, text: text, ts: ts)
 
-    Emotion.create(chat_id: chat_id, user_id: user_id, channel_id: channel_id, emovalue: result["emovalue"], repeat: result["repeat"])
+    #hc = Everests::GetEmotion.new
+    #result = JSON.parse(hc.get(text))
+    result = JSON.parse({ emoValue: 0.800100, behavior: false, osychology: false, repeat: "釣りは、だね", featWordCount: 0, congnition: true, emotion: true }.to_json)
+    emovalue = result["emoValue"].to_d.floor(4).to_f
+    emotion = Emotion.create(chat_id: chat.id, user_id: user.id, channel_id: channel.id, emovalue: emovalue, repeat: result["repeat"])
+
+    client = SlackForm.new
+    send_text = "発言者： #{user.slack_name}\n発言内容： #{text}"
+    client.post(to: channel, text: "#{send_text}\n(emovalue: #{emotion.emovalue})", name: EasySettings.slavest.bot_names.everest)
+    true
   end
 
-  def everests_url
-    urls = EasySettings.everests.urls
-    urls.base + urls.get_emotion
-  end
-
-  def temp_back
-    { emovalue: 0.800100, behavior: false, osychology: false, repeat: "釣りは、だね", featWordCount: 0, congnition: true, emotion: true }.to_json
-  end
 end
