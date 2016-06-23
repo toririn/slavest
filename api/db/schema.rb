@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160605082445) do
+ActiveRecord::Schema.define(version: 20160626000001) do
 
   create_table "channels", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "slack_id"
@@ -54,6 +54,18 @@ ActiveRecord::Schema.define(version: 20160605082445) do
     t.text     "repeat",     limit: 65535
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+  end
+
+  create_table "emovalue_options", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id",                                           null: false
+    t.boolean  "use_take",                          default: false
+    t.integer  "notification_decrease",   limit: 1, default: 0,     null: false
+    t.integer  "notification_increase",   limit: 1, default: 0,     null: false
+    t.integer  "notification_slowdown",   limit: 1, default: 0,     null: false
+    t.integer  "notification_regular",    limit: 1, default: 0,     null: false
+    t.integer  "notification_push_guide", limit: 1, default: 0,     null: false
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
   end
 
   create_table "groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
