@@ -34,19 +34,34 @@ describe EmotionsController do
     end
 
     context '異常系:' do
-      before do
-        post :create, params: { user: user.slack_id.concat("missing"), channel: channel.slack_id, text: "test", ts: "0000000000", api_token: EasySettings.slavest.api_token }
+      context 'DBに存在しないユーザの投稿があったら' do
+        before do
+          post :create, params: { user: user.slack_id.concat("missing"), channel: channel.slack_id, text: "test", ts: "0000000000", api_token: EasySettings.slavest.api_token }
+        end
+        it '警告を返す' do
+          res = JSON.parse(response.body)
+          expect(res["message"]).to eq EasySettings.controllers.emotions.messages.user_not_found
+        end
+        it 'statu:200, result:false のJSONが返ること' do
+          res = JSON.parse(response.body)
+          expect(res["status"]).to eq 200
+          expect(res["result"]).to eq false
+        end
       end
-
-      it 'DBに存在しないユーザの投稿があったら警告を返す' do
-        res = JSON.parse(response.body)
-        expect(res["message"]).to eq EasySettings.controllers.emotions.messages.user_not_found
-      end
-
-      it 'statu:200, result:false のJSONが返ること' do
-        res = JSON.parse(response.body)
-        expect(res["status"]).to eq 200
-        expect(res["result"]).to eq false
+      context 'オプションが無効になっているユーザの投稿があったら' do
+        let(:user)    { create(:user, :with_emovalue_option) }
+        before do
+          post :create, params: { user: user.slack_id, channel: channel.slack_id, text: "test", ts: "0000000000", api_token: EasySettings.slavest.api_token }
+        end
+        it '対象ユーザではないというメッセージを返す' do
+          res = JSON.parse(response.body)
+          expect(res["message"]).to eq EasySettings.controllers.emotions.messages.not_used_emotion
+        end
+        it 'statu:200, result:false のJSONが返ること' do
+          res = JSON.parse(response.body)
+          expect(res["status"]).to eq 200
+          expect(res["result"]).to eq false
+        end
       end
     end
   end
