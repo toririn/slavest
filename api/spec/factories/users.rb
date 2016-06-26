@@ -20,5 +20,18 @@ FactoryGirl.define do
         user.emotions = create_list(:emotion, evaluator.emotion_count)
       end
     end
+
+    trait :with_emovalue_option do
+      transient do
+        all_use false
+      end
+      after(:create) do |user, evaluator|
+        if evaluator.all_use
+          user.emovalue_option = create(:emovalue_option, :all_use)
+        else
+          user.emovalue_option = create(:emovalue_option)
+        end
+      end
+    end
   end
 end

@@ -3,7 +3,7 @@ require 'rails_helper'
 describe EmotionsController do
 
   describe 'POST #create' do
-    let(:user)    { create(:user) }
+    let(:user)    { create(:user, :with_emovalue_option, all_use: true) }
     let(:channel) { create(:channel) }
     let(:job)     { Everests::GetEmotionJob.new }
 
@@ -52,7 +52,7 @@ describe EmotionsController do
   end
 
   describe 'POST #average' do
-    let(:user)    { create(:user) }
+    let(:user)    { create(:user, :with_emovalue_option, all_use: true) }
     let(:channel) { create(:channel) }
     let(:job)     { Everests::GetEmotionJob.new }
 

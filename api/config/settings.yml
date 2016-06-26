@@ -22,6 +22,7 @@ default: &default
       messages:
         ok: OK
         user_not_found: WORN - 存在しないユーザです
+        not_used_emotion: INFO - 対象ユーザではありません
 
 development:
   <<: *default
