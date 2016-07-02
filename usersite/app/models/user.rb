@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_one  :channel, foreign_key: :created_user_id
+  has_one  :emovalue_option
   has_many :chats
   has_many :emotions
 
@@ -15,5 +16,9 @@ class User < ApplicationRecord
     else
       find_by(slack_id: param) || find_by(slack_name: param)
     end
+  end
+
+  def used_emotion?
+    emovalue_option.try(:use_take)
   end
 end
