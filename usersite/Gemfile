@@ -34,6 +34,8 @@ gem 'delayed_job_active_record'
 
 gem 'materialize-sass'
 
+gem 'active_decorator'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
