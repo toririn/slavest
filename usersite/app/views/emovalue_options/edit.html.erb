@@ -1,0 +1,41 @@
+<h2><%= @emovalue_option.user.slack_name %>さんの設定(編集中)</h2>
+<%= form_tag edit_user_emovalue_option_path(user_id: @emovalue_option.user.id, id: @emovalue_option.id), method: :post do %>
+  <table class="highlight">
+    <thead>
+      <tr>
+        <th data-field="label">サービス名</th>
+        <th data-field="status">使用(通知頻度/タイミング)</th>
+      </tr>
+
+      <tbody class="input-field">
+        <tr>
+          <td><%= EasySettings.models.emovalue_option.labels.use_take %></td>
+          <td><%= select_tag :use_take, options_for_select(@emovalue_option.select_options(:use_take), selected: @emovalue_option.value_use_take) %></td>
+        </tr>
+        <tr>
+          <td><%= EasySettings.models.emovalue_option.labels.decrease %></td>
+          <td><%= select_tag :decrease, options_for_select(@emovalue_option.select_options(:decrease), selected: @emovalue_option.notification_decrease) %></td>
+        </tr>
+        <tr>
+          <td><%= EasySettings.models.emovalue_option.labels.increase %></td>
+          <td><%= select_tag :increase, options_for_select(@emovalue_option.select_options(:increase), selected: @emovalue_option.notification_increase) %></td>
+        </tr>
+        <tr>
+          <td><%= EasySettings.models.emovalue_option.labels.slowdown %></td>
+          <td><%= select_tag :slowdown, options_for_select(@emovalue_option.select_options(:slowdown), selected: @emovalue_option.notification_slowdown) %></td>
+        </tr>
+        <tr>
+          <td><%= EasySettings.models.emovalue_option.labels.regular %></td>
+          <td><%= select_tag :regular, options_for_select(@emovalue_option.select_options(:regular), selected: @emovalue_option.notification_regular) %></td>
+        </tr>
+        <tr>
+          <td><%= EasySettings.models.emovalue_option.labels.push_guide %></td>
+          <td><%= select_tag :push_guide, options_for_select(@emovalue_option.select_options(:push_guide), selected: @emovalue_option.notification_push_guide) %></td>
+        </tr>
+      </tbody>
+  </table>
+  <%= submit_tag "完了", class: "btn waves-effect waves-light center" %>
+<% end %>
+<%= form_tag user_emovalue_options_path(user_id: @emovalue_option.user.id), method: :get do %>
+  <%= submit_tag "編集を中止する", class: "btn waves-effect waves-light center blue-grey", confirm: "編集内容は破棄されますがいいですか？" %>
+<% end %>

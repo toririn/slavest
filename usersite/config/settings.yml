@@ -19,6 +19,74 @@ default: &default
       emovalue_number_digits: 5
     sessions:
       key: <%= ENV['SESSIONS_KEY'] %>
+    emovalue_option:
+      labels:
+        use_take: "Slarestの感情値通知サービス"
+        decrease: "あなたの感情値に減少が見られたとき、通知を受けますか"
+        increase: "あなたの感情値に増加が見られたとき、通知を受けますか"
+        slowdown: "あなたの感情値が停滞しているとき、通知を受けますか"
+        regular: "Slarestからの定期的な感情の確認通知を受けますか"
+        push_guide: "Slarest開発メンバーからのメッセージを受けますか"
+      use_take:
+        displays:
+          refuse: "使わない"
+          accept: "使う"
+        set_values:
+          refuse: 0
+          accept: 1
+      decrease:
+        displays:
+          refuse: "受けない"
+          often: "受ける(頻度多)"
+          occasionally: "受ける(頻度少)"
+        set_values:
+          refuse: 0
+          often: 1
+          occasionally: 2
+      increase:
+        displays:
+          refuse: "受けない"
+          often: "受ける(頻度多)"
+          occasionally: "受ける(頻度少)"
+        set_values:
+          refuse: 0
+          often: 1
+          occasionally: 2
+      slowdown:
+        displays:
+          refuse: "受けない"
+          often: "受ける(頻度多)"
+          occasionally: "受ける(頻度少)"
+        set_values:
+          refuse: 0
+          often: 1
+          occasionally: 2
+      regular:
+        displays:
+          refuse: "受けない"
+          mo_no_ni: "受ける(朝、昼、夕)"
+          mo: "受ける(朝)"
+          no: "受ける(昼)"
+          ni: "受ける(夕)"
+          mo_no: "受ける(朝、昼)"
+          mo_ni: "受ける(朝、夕)"
+          no_ni: "受ける(昼、夕)"
+        set_values:
+          refuse: 0
+          mo_no_ni: 1
+          mo: 2
+          no: 3
+          ni: 4
+          mo_no: 5
+          mo_ni: 6
+          no_ni: 7
+      push_guide:
+        displays:
+          refuse: "受けない"
+          accept: "受ける"
+        set_values:
+          refuse: 0
+          accept: 1
 
 development:
   <<: *default
