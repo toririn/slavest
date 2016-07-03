@@ -1,5 +1,5 @@
 class Channel < ApplicationRecord
-  has_one  :user, foreign_key: :id, primary_key: :created_user_id
+  belongs_to  :user, foreign_key: :id, primary_key: :created_user_id
   has_many :chats
   has_many :emotions
 

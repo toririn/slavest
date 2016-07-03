@@ -5,6 +5,9 @@ describe User do
 
   describe '#relation' do
     context 'has_many:' do
+      it 'channel' do
+        should have_many(:channels)
+      end
       it 'chats' do
         should have_many(:chats)
       end
@@ -13,21 +16,18 @@ describe User do
       end
     end
     context 'has_one:' do
-      it 'channel' do
-        should have_one(:channel)
-      end
       it 'emovalue_option' do
         should have_one(:emovalue_option)
       end
     end
   end
 
-  describe '#with_channel' do
-    let(:user) { create(:user, :with_channel) }
+  describe '#with_channels' do
+    let(:user) { create(:user, :with_channels) }
 
     context '正常系:' do
       it '作成したチャンネルのオブジェクトを取得できること' do
-        expect(User.with_channel.find(user.id).channel).to eq user.channel
+        expect(User.with_channels.find(user.id).channels).to eq user.channels
       end
     end
   end

@@ -1,10 +1,10 @@
 class User < ApplicationRecord
-  has_one  :channel,         foreign_key: :created_user_id
+  has_many :channels,         foreign_key: :created_user_id
   has_one  :emovalue_option
   has_many :chats
   has_many :emotions
 
-  scope :with_channel,         -> { includes(:channel) }
+  scope :with_channels,        -> { includes(:channels) }
   scope :with_chats,           -> { includes(:chats) }
   scope :with_emotions,        -> { includes(:emotions) }
   scope :with_emovalue_option, -> { includes(:emovalue_option) }

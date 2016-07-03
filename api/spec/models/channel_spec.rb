@@ -11,9 +11,9 @@ describe Channel do
         should have_many(:emotions)
       end
     end
-    context 'has_one:' do
+    context 'belongs_to:' do
       it 'user' do
-        should have_one(:user)
+        should belong_to(:user)
       end
     end
   end

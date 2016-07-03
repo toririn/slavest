@@ -8,8 +8,13 @@ FactoryGirl.define do
     created_at      { Time.zone.yesterday }
     updated_at      { Time.zone.now.beginning_of_day }
 
-    trait :with_channel do
-      channel
+    trait :with_channels do
+      transient do
+        channel_count 3
+      end
+      after(:create) do |user, evaluator|
+        user.channels = create_list(:channel, evaluator.channel_count)
+      end
     end
 
     trait :with_emotions do
