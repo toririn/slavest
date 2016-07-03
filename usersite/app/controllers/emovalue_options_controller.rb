@@ -1,10 +1,10 @@
 class EmovalueOptionsController < ApplicationController
   def index
-    @emovalue_option = EmovalueOption.with_user.find_by(user_id: params[:user_id])
+    @emovalue_option = EmovalueOption.with_user.find_by(user_id: current_user[:id])
   end
 
   def edit
-    @emovalue_option = EmovalueOption.with_user.find_by(user_id: params[:user_id])
+    @emovalue_option = EmovalueOption.with_user.find_by(user_id: current_user[:id])
 
     if request.method.eql?("POST")
       @emovalue_option.update(

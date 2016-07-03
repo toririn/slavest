@@ -1,6 +1,13 @@
 default: &default
   slack:
     api_token: <%= ENV['SLACK_API_TOKEN'] %>
+    client_id: "<%= ENV['SLACK_CLIENT_ID'] %>"
+    secret_key: <%= ENV['SLACK_SECRET_KEY'] %>
+    team: <%= ENV['SLACK_TEAM_NAME'] %>
+    team_id: <%= ENV['SLACK_TEAM_ID'] %>
+    scope: <%= ENV['SLACK_SCOPE'] %>
+    redirect_url: <%= ENV['SLACK_REDIRECT_URL'] %>
+    state: <%= ENV['SLACK_STATE_CODE'] %>
   slavest:
     api_token: <%= ENV['SLAVEST_API_TOKEN'] %>
     bot_names:

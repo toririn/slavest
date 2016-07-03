@@ -1,9 +1,8 @@
 <h2>Welcome the Slarest Door</h2>
-<p>秘密の暗号を入力してください。</p>
+<p>Slackでログインしてください</p>
 <div class="col-sm-4">
-  <%= form_tag(sessions_path, method: :post) do %>
-    <%= text_field :sessions, :key %>
-    <%= submit_tag "送信" %>
+  <%= form_tag(new_session_path, method: :get) do %>
+    <%= submit_tag "Slack" %>
   <% end %>
 </div>
 <div class="col-sm-6">
