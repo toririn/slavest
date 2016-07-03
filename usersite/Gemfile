@@ -53,6 +53,11 @@ group :development, :test do
   gem 'faker'
   gem 'faker-japanese'
   gem 'rubocop'
+
+  gem 'capybara'
+  gem 'capybara-webkit'
+  gem 'turnip'
+  gem 'selenium-webdriver'
 end
 
 group :development do

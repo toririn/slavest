@@ -39,6 +39,7 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    addressable (2.4.0)
     arel (7.0.0)
     ast (2.1.0)
     astrolabe (1.3.1)
@@ -47,6 +48,18 @@ GEM
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
     byebug (8.2.5)
+    capybara (2.7.1)
+      addressable
+      mime-types (>= 1.16)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      xpath (~> 2.0)
+    capybara-webkit (1.11.1)
+      capybara (>= 2.3.0, < 2.8.0)
+      json
+    childprocess (0.5.9)
+      ffi (~> 1.0, >= 1.0.11)
     coderay (1.1.1)
     coffee-rails (4.1.1)
       coffee-script (>= 2.2.0)
@@ -85,6 +98,8 @@ GEM
       eventmachine (>= 0.12.0)
       websocket-driver (>= 0.5.1)
     ffi (1.9.10)
+    gherkin (2.12.2)
+      multi_json (~> 1.3)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     hashie (3.4.4)
@@ -175,6 +190,10 @@ GEM
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
     ref (2.0.0)
+    rspec (3.1.0)
+      rspec-core (~> 3.1.0)
+      rspec-expectations (~> 3.1.0)
+      rspec-mocks (~> 3.1.0)
     rspec-core (3.1.7)
       rspec-support (~> 3.1.0)
     rspec-expectations (3.1.2)
@@ -199,6 +218,7 @@ GEM
       ruby-progressbar (~> 1.7)
       tins (<= 1.6.0)
     ruby-progressbar (1.7.5)
+    rubyzip (1.2.0)
     sass (3.4.22)
     sass-rails (5.0.4)
       railties (>= 4.0.0, < 5.0)
@@ -206,6 +226,10 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    selenium-webdriver (2.53.4)
+      childprocess (~> 0.5)
+      rubyzip (~> 1.0)
+      websocket (~> 1.0)
     shoulda-matchers (3.0.1)
       activesupport (>= 4.0.0)
     simple_slack (0.2.5)
@@ -237,6 +261,9 @@ GEM
     turbolinks (5.0.0.beta2)
       turbolinks-source
     turbolinks-source (5.0.0.beta4)
+    turnip (2.1.1)
+      gherkin (~> 2.5)
+      rspec (>= 3.0, < 4.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (3.0.0)
@@ -245,9 +272,12 @@ GEM
       activemodel (>= 4.2)
       debug_inspector
       railties (>= 4.2)
+    websocket (1.2.3)
     websocket-driver (0.6.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
+    xpath (2.0.0)
+      nokogiri (~> 1.3)
     yard (0.8.7.6)
 
 PLATFORMS
@@ -256,6 +286,8 @@ PLATFORMS
 DEPENDENCIES
   active_decorator
   byebug
+  capybara
+  capybara-webkit
   coffee-rails (~> 4.1.0)
   database_cleaner
   delayed_job_active_record
@@ -278,12 +310,14 @@ DEPENDENCIES
   rspec-rails
   rubocop
   sass-rails (~> 5.0)
+  selenium-webdriver
   shoulda-matchers
   simple_slack (~> 0.2.5)
   spring
   spring-watcher-listen (~> 2.0.0)
   therubyracer
   turbolinks (~> 5.x)
+  turnip
   tzinfo-data
   uglifier (>= 1.3.0)
   web-console
